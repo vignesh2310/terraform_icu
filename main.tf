@@ -35,7 +35,7 @@ resource "aws_security_group" "nv_sg" {
     from_port        = 443
     to_port          = 443
     protocol         = "tcp"
-    cidr_blocks      = [aws_vpc.nv_vpc_cidr_block]
+    cidr_blocks      = [aws_vpc.nv_vpc.cidr_block]
   }
 
   egress {
