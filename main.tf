@@ -19,7 +19,7 @@ resource "aws_vpc" "nv_vpc" {
 resource "aws_subnet" "nv_subnet" {
       vpc_id = aws_vpc.nv_vpc.id
       cidr_block = "16.0.0.0/24"
-      availability_zone = "us-east-1c"
+      availability_zone = var.availability_zone
       tags = {
         Name = "nv_subnet"
       }
