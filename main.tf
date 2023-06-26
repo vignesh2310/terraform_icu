@@ -82,6 +82,51 @@ resource "aws_subnet" "pvt_subnet_03" {
       }
 }
 
+resource "aws_internet_gateway" "nv_igw" {
+  vpc_id = aws_vpc.nv_vpc.id
+
+  tags = {
+    Name = "north_virigina-igw"
+  }
+}
+
+resource "aws_route_table" "pub_rt" {
+  vpc_id = aws_vpc.nv_vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.nv_igw.id
+  }
+
+   tags = {
+    Name = "public_route-table"
+  }
+}
+
+resource "aws_route_table" "pvt_rt" {
+  vpc_id = aws_vpc.nv_vpc.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.nv_igw.id
+  }
+
+   tags = {
+    Name = "private_route-table"
+  }
+}
+
+resource "aws_route_table_association" "pub_rt-asso" {
+  subnet_id      = ["aws_subnet.pub_subnet_01.id", "aws_subnet.pub_subnet_02.id", "aws_subnet.pub_subnet_03.id"]
+  route_table_id = aws_route_table.pub_rt.id
+}
+
+resource "aws_route_table_association" "pvt_rt-asso" {
+  subnet_id      = ["aws_subnet.pvt_subnet_01.id", "aws_subnet.pvt_subnet_02.id", "aws_subnet.pvt_subnet_03.id"]
+  route_table_id = aws_route_table.pvt_rt.id
+}
+
+
 resource "aws_security_group" "nv_sg" {
   name        = "nv_sg"
   description = "Allow TLS inbound traffic"
