@@ -118,12 +118,12 @@ resource "aws_route_table" "pvt_rt" {
 
 resource "aws_route_table_association" "pub_rt-asso" {
 
-  subnet_id      = "${aws_subnet.pub_subnet_01.id}, ${aws_subnet.pub_subnet_02.id}, ${aws_subnet.pub_subnet_03.id}"
+  subnet_id      = aws_subnet.pub_subnet_01.id
   route_table_id = aws_route_table.pub_rt.id
 }
 
 resource "aws_route_table_association" "pvt_rt-asso" {
-  subnet_id      = "${aws_subnet.pvt_subnet_01.id}, ${aws_subnet.pvt_subnet_02.id}, ${aws_subnet.pvt_subnet_03.id}"
+  subnet_id      = aws_subnet.pvt_subnet_01.id
   route_table_id = aws_route_table.pvt_rt.id
 }
 
