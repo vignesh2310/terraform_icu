@@ -17,12 +17,57 @@ resource "aws_vpc" "nv_vpc" {
     }  
 }
 
-resource "aws_subnet" "nv_subnet" {
+resource "aws_subnet" "pub_subnet_01" {
       vpc_id = aws_vpc.nv_vpc.id
       cidr_block = "16.0.0.0/24"
-      availability_zone = var.availability_zone
+      availability_zone = var.availability_zone.zonea
       tags = {
-        Name = "nv_subnet"
+        Name = "public_subnet_01"
+      }
+}
+
+resource "aws_subnet" "pub_subnet_02" {
+      vpc_id = aws_vpc.nv_vpc.id
+      cidr_block = "16.0.1.0/24"
+      availability_zone = var.availability_zone.zoneb
+      tags = {
+        Name = "public_subnet_02"
+      }
+}
+
+resource "aws_subnet" "pub_subnet_03" {
+      vpc_id = aws_vpc.nv_vpc.id
+      cidr_block = "16.0.2.0/24"
+      availability_zone = var.availability_zone.zonec
+      tags = {
+        Name = "public_subnet_03"
+      }
+}
+
+resource "aws_subnet" "pvt_subnet_01" {
+      vpc_id = aws_vpc.nv_vpc.id
+      cidr_block = "16.0.3.0/24"
+      availability_zone = var.availability_zone.zonea
+      tags = {
+        Name = "private_subnet_01"
+      }
+}
+
+resource "aws_subnet" "pvt_subnet_02" {
+      vpc_id = aws_vpc.nv_vpc.id
+      cidr_block = "16.0.4.0/24"
+      availability_zone = var.availability_zone.zoneb
+      tags = {
+        Name = "private_subnet_02"
+      }
+}
+
+resource "aws_subnet" "pvt_subnet_03" {
+      vpc_id = aws_vpc.nv_vpc.id
+      cidr_block = "16.0.5.0/24"
+      availability_zone = var.availability_zone.zonec
+      tags = {
+        Name = "private_subnet_03"
       }
 }
 
