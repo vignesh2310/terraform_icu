@@ -12,7 +12,7 @@ variable "instance_type" {
 
 variable "availability_zone" {
   description = "choice of availability_zone"
-  type        = string
+  type        = map
   default     = {
     zonea = "us-east-1a"
     zoneb = "us-east-1b"

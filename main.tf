@@ -1,11 +1,22 @@
-resource "aws_instance" "nv_demo" {
+resource "aws_instance" "nv_public" {
     ami = "ami-022e1a32d3f742bd8"
     instance_type = var.instance_type
-    availability_zone = var.availability_zone
+    availability_zone = var.availability_zone.zonea
     vpc_security_group_ids = [aws_security_group.nv_sg.id]
-    subnet_id = aws_subnet.nv_subnet.id
+    subnet_id = aws_subnet.pub_subnet_02.id
     tags = {
-        Name = "nv_instance"
+        Name = "nv_public_instance"
+    }
+} 
+
+resource "aws_instance" "nv_private" {
+    ami = "ami-022e1a32d3f742bd8"
+    instance_type = var.instance_type
+    availability_zone = var.availability_zone.zoneb
+    vpc_security_group_ids = [aws_security_group.nv_sg.id]
+    subnet_id = aws_subnet.pvt_subnet_02.id
+    tags = {
+        Name = "nv_private_instance"
     }
 } 
 
